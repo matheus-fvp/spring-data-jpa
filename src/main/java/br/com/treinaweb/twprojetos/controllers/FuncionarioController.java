@@ -2,6 +2,7 @@ package br.com.treinaweb.twprojetos.controllers;
 
 import br.com.treinaweb.twprojetos.models.Funcionario;
 import br.com.treinaweb.twprojetos.models.UF;
+import br.com.treinaweb.twprojetos.repositories.CargoRepository;
 import br.com.treinaweb.twprojetos.repositories.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class FuncionarioController {
 
     @Autowired
-    FuncionarioRepository funcionarioRepository;
+    private FuncionarioRepository funcionarioRepository;
+    @Autowired
+    private CargoRepository cargoRepository;
 
     @GetMapping
     public ModelAndView home() {
@@ -39,6 +42,7 @@ public class FuncionarioController {
         ModelAndView modelAndView = new ModelAndView("funcionario/formulario");
 
         modelAndView.addObject("funcionario", new Funcionario());
+        modelAndView.addObject("cargos", cargoRepository.findAll());
         modelAndView.addObject("ufs", UF.values());
 
         return modelAndView;
@@ -48,6 +52,7 @@ public class FuncionarioController {
     public  ModelAndView editar(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("funcionario/formulario");
         modelAndView.addObject("funcionario", funcionarioRepository.getOne(id));
+        modelAndView.addObject("cargos", cargoRepository.findAll());
         modelAndView.addObject("ufs", UF.values());
         return modelAndView;
     }
