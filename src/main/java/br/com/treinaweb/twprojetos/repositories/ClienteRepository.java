@@ -8,5 +8,5 @@ import br.com.treinaweb.twprojetos.models.Cliente;
  * ClienteRepository
  */
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-    
+
 }
