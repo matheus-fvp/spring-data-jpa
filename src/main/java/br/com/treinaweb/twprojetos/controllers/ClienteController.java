@@ -1,6 +1,7 @@
 package br.com.treinaweb.twprojetos.controllers;
 
 import br.com.treinaweb.twprojetos.models.Cliente;
+import br.com.treinaweb.twprojetos.models.UF;
 import br.com.treinaweb.twprojetos.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,7 @@ public class ClienteController {
         ModelAndView modelAndView = new ModelAndView("cliente/formulario");
 
         modelAndView.addObject("cliente", new Cliente());
+        modelAndView.addObject("ufs", UF.values());
 
         return modelAndView;
     }
@@ -46,6 +48,7 @@ public class ClienteController {
     public  ModelAndView editar(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("cliente/formulario");
         modelAndView.addObject("cliente", clienteRepository.getOne(id));
+        modelAndView.addObject("ufs", UF.values());
         return modelAndView;
     }
 
